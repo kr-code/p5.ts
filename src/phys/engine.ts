@@ -27,7 +27,8 @@ export class Engine {
   setup(x: number, y: number) {
     this.x = x;
     this.y = y;
-    this._p5.createCanvas(this.x, this.y);
+    const canvas = this._p5.createCanvas(this.x, this.y);
+    canvas.parent(this.name);
     this.reset(new Environment());
   }
 
@@ -42,7 +43,7 @@ export class Engine {
       this._p5.background(0);
       for (let i = this.entities.length - 1; i >= 0; i--) {
         let entity = this.entities[i];
-        entity.boundary();
+        entity.bounceEdges();
         entity.update();
         entity.show();
         if (!entity.alive) {
